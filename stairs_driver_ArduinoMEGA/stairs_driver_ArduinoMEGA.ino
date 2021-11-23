@@ -23,7 +23,7 @@ int maximum_pwm = 4095;
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Staris drvier 1.0");
+  Serial.println("Staris drvier 1.1");
   pwm1.begin();
   pwm2.begin();
   pwm1.setPWMFreq(1000);  // This is the maximum PWM frequency

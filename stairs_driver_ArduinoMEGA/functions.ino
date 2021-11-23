@@ -17,7 +17,7 @@ void stairs_up()
     }
   }
   delay(duration_time);
-  all_to_pwm_min(minimum_pwm, maximum_pwm, speed);
+  all_to_pwm_min(minimum_pwm, maximum_pwm, speed, false);
   light_flag = true;
   dbl_blink();
 }
@@ -42,7 +42,7 @@ void stairs_down()
     }
   }
   delay(duration_time);
-  all_to_pwm_min(minimum_pwm, maximum_pwm, speed);
+  all_to_pwm_min(minimum_pwm, maximum_pwm, speed, false);
   light_flag = true;
   
   dbl_blink();
@@ -77,10 +77,10 @@ void all_to_pwm_max(int pwm_min, int pwm_max, byte sp)
 
 // *********************************************************************
 
-void all_to_pwm_min(int pwm_min, int pwm_max, byte sp)
+void all_to_pwm_min(int pwm_min, int pwm_max, byte sp, bool delay_flag)
 {
-  byte del = 1;
- delay(10000);
+ byte del = 1;
+ if (delay_flag == true) { delay(10000); }
   if ((pwm_min >= 0) && (maximum_pwm > pwm_min) && (pwm_max <= maximum_pwm))
   {
     if (pwm_max < maximum_pwm or pwm_min>0) {del = 5;}
@@ -127,7 +127,7 @@ void click1()
 {
   if (light_flag == true)
   {
-    all_to_pwm_min(0, current_pwm, speed);
+    all_to_pwm_min(0, current_pwm, speed, false);
     all_off();
   }
   else
@@ -142,7 +142,7 @@ void click2()
 {
   if (light_flag == true)
   {
-    all_to_pwm_min(0, current_pwm, speed);
+    all_to_pwm_min(0, current_pwm, speed, true);
     all_off();
   }
   else
@@ -169,7 +169,7 @@ void longPressStart1()
 {
   if (light_flag == true)
   {
-    all_to_pwm_min(0, current_pwm, speed);
+    all_to_pwm_min(0, current_pwm, speed, false);
     all_off();
   }
   else
@@ -184,7 +184,7 @@ void longPressStart2()
 {
   if (light_flag == true)
   {
-    all_to_pwm_min(0, current_pwm, speed);
+    all_to_pwm_min(0, current_pwm, speed, false);
     all_off();
   }
   else
@@ -195,6 +195,9 @@ void longPressStart2()
 // *********************************************************************
 
 void dbl_blink()
+// Function used to confirm that task was finished.
+// When status LED blinked 3 times it is information that function was executed and finished.
+// !!! Used only for debugging !!!
 {
   digitalWrite(LED, HIGH);
   delay(100);

@@ -11,11 +11,11 @@ OneButton button1(A1, true);            // button 1 assigned to A1 board pin
 OneButton button2(A2, true);            // button 2 assigned to A2 board pin
 bool light_flag = false;
 uint16_t current_pwm;
-byte speed = 15;
+byte speed = 10;
 byte LED = 13;                //number of status LED on Arduino PCB (for NANO it is 13)
 byte number_of_leds = 17;     //total number of LEDS
 int duration_time = 5000;
-byte minimum_pwm = 100;       //minimum power for LEDS
+byte minimum_pwm = 200;       //minimum power for LEDS
 int maximum_pwm = 4095;       //maximum power for LEDS
 
 

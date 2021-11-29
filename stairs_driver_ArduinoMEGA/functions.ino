@@ -55,7 +55,7 @@ void all_to_pwm_max(int pwm_min, int pwm_max, byte sp)
   int del = 1;
   if ((pwm_min >= 0) && (maximum_pwm > pwm_min) && (pwm_max <= maximum_pwm))
   {
-    if (pwm_max - maximum_pwm <4095 or pwm_min>0) {del = 2;}
+    if (pwm_max - maximum_pwm < 4095 or pwm_min > 0) {del = 2;}
     for (int i = pwm_min; i <= pwm_max; i += sp) 
     {
       for (byte pwmnum = 0; pwmnum < number_of_leds; pwmnum++) 
@@ -66,7 +66,7 @@ void all_to_pwm_max(int pwm_min, int pwm_max, byte sp)
             pwm1.setPWM(pwmnum, 0, i);
             pwm2.setPWM(0, 0, i);
           }
-      delay(del);
+      if (pwm_max <= 2000) { delay(del); }
       }
     }
     light_flag = true;
@@ -83,16 +83,17 @@ void all_to_pwm_min(int pwm_min, int pwm_max, byte sp, bool delay_flag)
  if (delay_flag == true) { delay(10000); }
   if ((pwm_min >= 0) && (maximum_pwm > pwm_min) && (pwm_max <= maximum_pwm))
   {
-    if (pwm_max < maximum_pwm or pwm_min>0) {del = 5;}
-    for (int i = pwm_max; i >= pwm_min; i -= sp) 
+    if (pwm_max < maximum_pwm or pwm_min>0) {del = 1;}
+    for (int i = pwm_max; i >= pwm_min-10; i -= sp)
      {
+//      Serial.println(i);
       for (byte pwmnum = 0; pwmnum < number_of_leds; pwmnum++) 
       {
         pwm1.setPWM(pwmnum, 0, i);
         pwm2.setPWM(0, 0, i);
         
       }
-      delay(del);
+      if (pwm_max <= 2000) { delay(del); }
     }
     light_flag = false;
     current_pwm = pwm_min;
@@ -123,12 +124,12 @@ void all_off()
 
 // *********************************************************************
 
-void click1()
+void click1()   // bottom stairs button
 {
   if (light_flag == true)
   {
     all_to_pwm_min(0, current_pwm, speed, false);
-    all_off();
+//    all_off();
   }
   else
   {
@@ -138,12 +139,12 @@ void click1()
 
 // *********************************************************************
 
-void click2()
+void click2()     // top stairs button
 {
   if (light_flag == true)
   {
     all_to_pwm_min(0, current_pwm, speed, true);
-    all_off();
+//    all_off();
   }
   else
   {
@@ -170,7 +171,7 @@ void longPressStart1()
   if (light_flag == true)
   {
     all_to_pwm_min(0, current_pwm, speed, false);
-    all_off();
+//    all_off();
   }
   else
   {
@@ -185,7 +186,7 @@ void longPressStart2()
   if (light_flag == true)
   {
     all_to_pwm_min(0, current_pwm, speed, false);
-    all_off();
+//    all_off();
   }
   else
   {

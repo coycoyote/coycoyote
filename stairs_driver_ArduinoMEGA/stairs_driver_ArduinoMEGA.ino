@@ -12,7 +12,7 @@ OneButton button2(A2, true);            // button 2 assigned to A2 board pin
 bool light_flag = false;
 uint16_t current_pwm;
 byte speed = 10;
-byte LED = 13;                //number of status LED on Arduino PCB (for NANO it is 13)
+byte LED = 1;                //number of status LED on Arduino PCB (for NANO it is 13)
 byte number_of_leds = 17;     //total number of LEDS
 int duration_time = 5000;
 byte minimum_pwm = 200;       //minimum power for LEDS
@@ -22,8 +22,8 @@ int maximum_pwm = 4095;       //maximum power for LEDS
 // *************************************************************************************
 
 void setup() {
-  Serial.begin(115200);
-  Serial.println("Staris drvier 1.2");
+//  Serial.begin(115200);
+//  Serial.println("Staris drvier 1.2");
   pwm1.begin();           // PWM1 initialization
   pwm2.begin();           // PWM2 initialization
   pwm1.setPWMFreq(1000);  // This is the maximum PWM frequency

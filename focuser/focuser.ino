@@ -73,7 +73,13 @@ dht DHT;
 
 // Stepper config
 #define STEPPER_PWM_PIN 11
-AccelStepper stepper = AccelStepper(AccelStepper::HALF4WIRE, A5, A4, A3, A2);
+AccelStepper stepper = AccelStepper(AccelStepper::HALF4WIRE, A3, A4, A5, A2);
+//AccelStepper stepper = AccelStepper(AccelStepper::HALF4WIRE, A4, A3, A2, A5);
+//AccelStepper stepper = AccelStepper(AccelStepper::HALF4WIRE, A2, A3, A5, A4);
+//AccelStepper stepper = AccelStepper(AccelStepper::HALF4WIRE, A2, A5, A4, A3);
+
+
+
 //AccelStepper stepper = AccelStepper(AccelStepper::DRIVER, A4, A3);  
   
 Timer timer;
